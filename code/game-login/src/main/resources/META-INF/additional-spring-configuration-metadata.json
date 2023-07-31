@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "management.port",
+  "type": "java.lang.String",
+  "description": "Set the port for actuator."
+}]}

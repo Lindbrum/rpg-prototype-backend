@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://dercole.it/prototypes/wsdltypes"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="AuthImplService"
+	targetNamespace="http://dercole.it/prototypes/wsdltypes">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://dercole.it/prototypes/wsdltypes"
+			attributeFormDefault="unqualified" elementFormDefault="unqualified"
+			targetNamespace="http://dercole.it/prototypes/wsdltypes">
+<!--			<xs:complexType name="loginDataType"/>-->
+<!--			<xsd:element name="login">-->
+<!--				<xs:complexType>-->
+<!--					<xs:sequence>-->
+<!--						<xs:element name="username" type="xs:string" />-->
+<!--						<xs:element name="password" type="xs:string" />-->
+<!--					</xs:sequence>-->
+<!--				</xs:complexType>-->
+<!--			</xsd:element>-->
+<!--			<xsd:element name="loginResponse">-->
+<!--				<xs:complexType>-->
+<!--					<xs:sequence>-->
+<!--						<xs:element name="return">-->
+<!--							<xs:complexType name="loginData">-->
+<!--								<xs:sequence>-->
+<!--									<xs:element name="token" type="xs:string" />-->
+<!--								</xs:sequence>-->
+<!--							</xs:complexType>-->
+<!--						</xs:element>-->
+<!--					</xs:sequence>-->
+<!--				</xs:complexType>-->
+<!--			</xsd:element>-->
+			<xsd:element name="WrongCredentialFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="message"
+							type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xsd:element>
+			<xsd:element name="signup">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="username" type="xs:string" />
+						<xs:element name="password" type="xs:string" />
+						<xs:element name="passwordConfirm" type="xs:string" />
+						<xs:element name="email" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xsd:element>
+			<xsd:element name="signupResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return">
+							<xs:complexType name="signupData">
+								<xs:sequence>
+									<xs:element name="message" type="xs:string" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xsd:element>
+			<xsd:element name="AlreadyExistsFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="message"
+							type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xsd:element>
+<!--			<xsd:element name="logout">-->
+<!--				<xs:complexType>-->
+<!--					<xs:sequence>-->
+<!--						<xs:element name="token" type="xs:string" />-->
+<!--					</xs:sequence>-->
+<!--				</xs:complexType>-->
+<!--			</xsd:element>-->
+<!--			<xsd:element name="logoutResponse">-->
+<!--				<xs:complexType>-->
+<!--					<xs:sequence>-->
+<!--						<xs:element name="return" type="xs:string" />-->
+<!--					</xs:sequence>-->
+<!--				</xs:complexType>-->
+<!--			</xsd:element>-->
+		</xs:schema>
+	</wsdl:types>
+<!--	<wsdl:message name="login">-->
+<!--		<wsdl:part element="tns:login" name="parameters">-->
+<!--		</wsdl:part>-->
+<!--	</wsdl:message>-->
+	<wsdl:message name="WrongCredentialFault">
+		<wsdl:part element="tns:WrongCredentialFault"
+			name="WrongCredentialFault">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="signup">
+		<wsdl:part element="tns:signup" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+<!--	<wsdl:message name="loginResponse">-->
+<!--		<wsdl:part element="tns:loginResponse" name="parameters">-->
+<!--		</wsdl:part>-->
+<!--	</wsdl:message>-->
+	<wsdl:message name="signupResponse">
+		<wsdl:part element="tns:signupResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AlreadyExistsFault">
+		<wsdl:part element="tns:AlreadyExistsFault"
+			name="AlreadyExistsFault">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="Auth">
+<!--		<wsdl:operation name="login">-->
+<!--			<wsdl:input message="tns:login" name="login">-->
+<!--			</wsdl:input>-->
+<!--			<wsdl:output message="tns:loginResponse"-->
+<!--				name="loginResponse">-->
+<!--			</wsdl:output>-->
+<!--			<wsdl:fault message="tns:WrongCredentialFault"-->
+<!--				name="WrongCredentialFault">-->
+<!--			</wsdl:fault>-->
+<!--		</wsdl:operation>-->
+		<wsdl:operation name="signup">
+			<wsdl:input message="tns:signup" name="signup">
+			</wsdl:input>
+			<wsdl:output message="tns:signupResponse" name="signupResponse">
+			</wsdl:output>
+			<wsdl:fault message="tns:AlreadyExistsFault"
+				name="AlreadyExistsFault">
+			</wsdl:fault>
+		</wsdl:operation>
+<!--		<wsdl:operation name="logout">-->
+<!--			<wsdl:input message="tns:logout" name="logout">-->
+<!--			</wsdl:input>-->
+<!--			<wsdl:output message="tns:logoutResponse" name="logoutResponse">-->
+<!--			</wsdl:output>-->
+<!--		</wsdl:operation>-->
+	</wsdl:portType>
+	<wsdl:binding name="AuthImplServiceSoapBinding"
+		type="tns:Auth">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+<!--		<wsdl:operation name="login">-->
+<!--			<soap:operation soapAction="" style="document" />-->
+<!--			<wsdl:input name="login">-->
+<!--				<soap:body use="literal" />-->
+<!--			</wsdl:input>-->
+<!--			<wsdl:output name="loginResponse">-->
+<!--				<soap:body use="literal" />-->
+<!--			</wsdl:output>-->
+<!--			<wsdl:fault name="WrongCredentialFault">-->
+<!--				<soap:fault name="WrongCredentialFault" use="literal" />-->
+<!--			</wsdl:fault>-->
+<!--		</wsdl:operation>-->
+		<wsdl:operation name="signup">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="signup">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="signupResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="AlreadyExistsFault">
+				<soap:fault name="AlreadyExistsFault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+<!--		<wsdl:operation name="logout">-->
+<!--			<soap:operation soapAction="" style="document" />-->
+<!--			<wsdl:input name="logout">-->
+<!--				<soap:body use="literal" />-->
+<!--			</wsdl:input>-->
+<!--			<wsdl:output name="logoutResponse">-->
+<!--				<soap:body use="literal" />-->
+<!--			</wsdl:output>-->
+<!--		</wsdl:operation>-->
+	</wsdl:binding>
+	<wsdl:service name="AuthImplService">
+		<wsdl:port binding="tns:AuthImplServiceSoapBinding"
+			name="AuthImplPort">
+			<soap:address
+				location="http://localhost:8080/auth" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
